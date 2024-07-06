@@ -7,12 +7,6 @@ from torch_geometric.utils import to_networkx
 from torch_geometric.nn import global_mean_pool as gap, global_max_pool as gmp
 from torch_geometric.utils import degree
 
-def compute_similarity(node_features):
-    """Compute the cosine similarity between node features."""
-    norm_features = F.normalize(node_features, p=2, dim=1)
-    similarity_matrix = torch.mm(norm_features, norm_features.t())
-    return similarity_matrix
-
 def identify_motif_nodes(data, cycle_lengths):
     G = pyg_to_networkx(data)
     motif_nodes = torch.zeros(data.num_nodes, dtype=torch.bool)
